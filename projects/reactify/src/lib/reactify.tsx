@@ -4,9 +4,9 @@ import React, { createContext, useContext, useEffect, useRef, useState } from "r
 
 type AnyComponentRef = ComponentRef<unknown>;
 
-type ApplicationRefResolver = () => Promise<ApplicationRef> | ApplicationRef;
+type ApplicationRefResolver = Promise<ApplicationRef> | ApplicationRef;
 
-export const AngularContext = createContext<ApplicationRefResolver>(() => createApplication());
+export const AngularContext = createContext<ApplicationRefResolver>(createApplication());
 
 export type ReactifyProps = {
   component: Type<unknown>;
@@ -18,7 +18,7 @@ export const Reactify: React.FunctionComponent<ReactifyProps> = ({ component, in
   const [appRef, setAppRef] = useState<ApplicationRef | null>(null);
   const [compRef, setCompRef] = useState<AnyComponentRef | null>(null);
 
-  Promise.resolve(useContext(AngularContext)()).then(setAppRef);
+  Promise.resolve(useContext(AngularContext)).then(setAppRef);
 
   useEffect(() => {
     if (appRef && hostRef.current) {

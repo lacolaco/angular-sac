@@ -48,12 +48,10 @@ describe("Reactify", () => {
       c = inject(token);
     }
 
-    const appRef = await createApplication({
-      providers: [{ provide: token, useValue: "baz" }],
-    });
+    const appRef = createApplication({ providers: [{ provide: token, useValue: "baz" }] });
 
     render(
-      <AngularContext.Provider value={() => appRef}>
+      <AngularContext.Provider value={appRef}>
         <Reactify component={TestComp} inputs={{ a: "foo", b: "bar" }} />
       </AngularContext.Provider>
     );
