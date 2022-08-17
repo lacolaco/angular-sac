@@ -12,8 +12,6 @@ describe("Reactify", () => {
     })
     class TestComp {}
 
-    const appRef = await createApplication();
-
     render(<Reactify component={TestComp} />);
 
     await waitFor(() => {
@@ -30,8 +28,6 @@ describe("Reactify", () => {
       @Input() a = "";
       @Input() b = "";
     }
-
-    const appRef = await createApplication();
 
     render(<Reactify component={TestComp} inputs={{ a: "foo", b: "bar" }} />);
 
